@@ -10,4 +10,4 @@ const HeaderNav = createMaterialTopTabNavigator({
   Profile: Profile
 })
 
-export default createAppContainer(HeaderNav)
+export default HeaderNav

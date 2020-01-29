@@ -10,12 +10,12 @@ import store from './redux'
 import { Provider } from 'react-redux'
 import Header from './app/header'
 import HeaderNav from './navigation/tabNavigator/headerNav'
+import MainNav from './navigation/stackNavigator/mainNavigator'
 
 function App () {
   return (
     <Provider store= {store}>
-      <Header/>
-      <HeaderNav/>
+      <MainNav/>
     </Provider>
   );
 };

@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { getCategories } from '../../redux/reducers/actions'
 import { dive } from '../../functions'
 import HeaderNav from '../../navigation/tabNavigator/headerNav'
+import { createAppContainer } from 'react-navigation';
 
 const Header = props => {
   return (
@@ -35,4 +36,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Header
+export default createAppContainer(Header)
