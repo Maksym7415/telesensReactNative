@@ -14,7 +14,6 @@ const Categories = props => {
   if (props.data) {
     return (
       <View style={styles.container}>
-        {console.log(props.navigation)}
           <ListFlat
             styles= {styles.listStyle}
             data= {props.data}

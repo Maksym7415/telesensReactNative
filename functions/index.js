@@ -1,3 +1,5 @@
+import {AsyncStorage} from 'react-native'
+
 function dive(strings, ...values) {
      let obj = values[0]
      for(let key of strings[1].split('.')) {
@@ -8,39 +10,31 @@ function dive(strings, ...values) {
     return obj
 }
 
+const setASItem = async (item, value) => {
+  try {
+      await AsyncStorage.setItem(item , value);
+    } catch (e) {
+
+    }
+  }
+
+
+  const getASItem = async (item) => {
+    try {
+      const value = await AsyncStorage.getItem(item);
+      if (value !== null) {
+        console.log(value)
+        return value
+      }
+    } catch (e) {
+
+    }
+  }
 function firstItem (arr) {
     let res = arr.filter(item => item.parentCatId ? item : '')
     return res
 }
 
-function defaultSubCat (arr, id) {
-    let res = arr && arr.filter(item => item.parentCatId && item.parentCatId === id)
-    return res
-}
-
-function currentCatSubcat (arr, id) {
-    let res = {}
-    arr && arr.forEach(item => {
-      if (item.contentCatId === id) {
-        res.subCat = item.catName
-        res.subCatID = item.contentCatId
-        if (res.subCat !== '') {
-          for (let key of arr) {
-            if (item.parentCatId === key.contentCatId) {
-              res.genre = key.catName
-              res.genreID = key.contentCatId
-            }
-          }
-        }
-      }
-
-    })
-    return res
-}
-
-function urlParams (str) {
-  return str.split('/')
-}
 
 function searchSong (arr, id) {
   return arr ? arr.filter(el => el.contentNo === id ? el : '') : ''
@@ -50,4 +44,4 @@ function getSubCatsContent (arr, id) {
   return arr.filter(item => item.parentCatId === id && item)
 }
 
-export { dive, firstItem, defaultSubCat, urlParams, searchSong, currentCatSubcat, getSubCatsContent}
+export { dive, firstItem, searchSong, getSubCatsContent, setASItem, getASItem}

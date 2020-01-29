@@ -15,8 +15,6 @@ const Content = props => {
   if (props.data) {
     return (
       <View style= {styles.container}>
-      {console.log(props.navigation)}
-      {props.data && console.log(props.data)}
         <ListFlat
           data= {props.data }
           renderItem= {({ item }) => <ItemContent press= {() => props.navigation.push('SongInfo', item)} itemStyle= {styles.itemContainer} imgStyle= {styles.image} src= {`https://t-rbt.telesens.ua/t-rbt/image?id=${item.imageId}`} title= {item.title} artist= {item.artist} price= {item.amountOnetime} />}

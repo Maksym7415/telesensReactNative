@@ -3,7 +3,6 @@ import { SafeAreaView, View, FlatList, Image, Text, TouchableOpacity } from 'rea
 
 const Item = (props) =>
     <TouchableOpacity style= {props.itemStyle} onPress= {props.press}>
-      {console.log(props)}
       <Text style={props.itemTitleStyle}>{props.title}</Text>
     </TouchableOpacity>
 
