@@ -3,8 +3,6 @@ import { StyleSheet, View, Button, Text } from 'react-native'
 import { connect } from 'react-redux'
 import { getCategories } from '../../redux/reducers/actions'
 import { dive } from '../../functions'
-import HeaderNav from '../../navigation/tabNavigator/headerNav'
-import { createAppContainer } from 'react-navigation';
 
 const Header = props => {
   return (
@@ -36,4 +34,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default createAppContainer(Header)
+export default Header
