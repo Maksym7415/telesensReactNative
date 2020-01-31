@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { StyleSheet, View, Button, Text, TouchableOpacity, Image } from 'react-native'
 import { connect } from 'react-redux'
-import { getCategories } from '../../redux/reducers/actions'
+import { logout } from '../../redux/reducers/actions'
 import { dive } from '../../functions'
 
 const Header = props => {
@@ -10,10 +10,15 @@ const Header = props => {
         <Text style= {{fontSize: 20}}>
           T-RBT
         </Text>
-        <TouchableOpacity style= {{width: 50, height: 50}} onPress= {props.press}>
-          {props.data ? <Text >Logout</Text> : <Text >Login</Text>}
+          <View style= {{width: 50, height: 50}}>
+          {props.data ? <TouchableOpacity onPress= {() => props.logout()}>
+                            <Text >Logout</Text>
+                        </TouchableOpacity> :
+                        <TouchableOpacity  onPress= {props.login}>
+                            <Text >Login</Text>
+                        </TouchableOpacity>}
           <Image style= {{width: 30, height: 30}} source= {{uri: 'https://t-rbt.telesens.ua/t-rbt/image?id=499105566'}}/>
-        </TouchableOpacity>
+        </View>
     </View>
   )
 }
@@ -29,4 +34,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default connect(state => ({data: dive`${state}authorization.payload.data`})) (Header)
+export default connect(state => ({data: dive`${state}authorization.payload.data`}), {logout}) (Header)

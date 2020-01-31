@@ -1,3 +1,5 @@
+import { removeItemFromStorage } from '../../../functions'
+
 const loginReducer = (state, action) => {
   const actions = {
     LOGIN() {
@@ -7,7 +9,7 @@ const loginReducer = (state, action) => {
       }
     },
     LOGOUT() {
-      localStorage.removeItem('RBTauth')
+      removeItemFromStorage()
       return {}
     }
   }

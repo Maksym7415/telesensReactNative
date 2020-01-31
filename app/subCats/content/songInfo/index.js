@@ -6,8 +6,6 @@ import { buySong } from '../../../../redux/reducers/actions'
 
 const SongInfo = props => {
 
-  
-
   return (
     <View>
       <Image style={{width: 200, height: 200}} source= {{uri: `https://t-rbt.telesens.ua/t-rbt/image?id=${props.navigation.state.params.imageId}`}}/>

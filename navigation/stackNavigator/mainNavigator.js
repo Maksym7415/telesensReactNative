@@ -13,7 +13,7 @@ const MainNav = createStackNavigator(
       navigationOptions: {
         header: ({navigation}) => {
 
-          return (<Header press= {() => navigation.push('Authorize')} />)
+          return (<Header login= {() => navigation.push('Authorize')} />)
         }
       }
     },
