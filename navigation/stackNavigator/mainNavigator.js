@@ -17,7 +17,13 @@ const MainNav = createStackNavigator(
         }
       }
     },
-    Authorize: Authorize
+    Authorize: {
+      screen: Authorize,
+      navigationOptions: () => ({
+        title: 'Authorize',
+        headerLeft: () => null
+      })
+    }
   }
 )
 

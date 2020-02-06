@@ -1,27 +1,74 @@
-import React, { useEffect } from 'react'
-import { StyleSheet, View, Text, Dimensions, Image, Button } from 'react-native'
-import { dive, getSubCatsContent } from '../../../../functions'
-import { connect } from 'react-redux'
-import { buySong } from '../../../../redux/reducers/actions'
+import React, { useState } from 'react'
+import { StyleSheet, View, Text, Dimensions, Image, TouchableOpacity } from 'react-native'
+import Slider from '@react-native-community/slider'
+import TrackPlayer, { TrackPlayerEvents } from 'react-native-track-player'
 
 const SongInfo = props => {
 
+  let [url] = useState(`https://t-rbt.telesens.ua/t-rbt/sound?id=${props.navigation.state.params.contentNo}&type=public`)
+  let [trackState, setTrackState] = useState()
+
+  const handleState = TrackPlayer.addEventListener('playback-state', async (data) => {
+          const state = await TrackPlayer.getState()
+          setTrackState(trackState = state)
+        })
+
+  props.navigation.addListener('willBlur', () => {
+    handleState.remove()
+    if (trackState === 3) {
+      TrackPlayer.stop()
+    }
+  })
+
+  const handlePlay = () => {
+    if(trackState !== 3) {
+      TrackPlayer.setupPlayer().then(async () => {
+        await TrackPlayer.add({
+          url: url
+        })
+        TrackPlayer.play()
+      })
+    } else {
+      TrackPlayer.stop()
+    }
+  }
+
   return (
-    <View>
-      <Image style={{width: 200, height: 200}} source= {{uri: `https://t-rbt.telesens.ua/t-rbt/image?id=${props.navigation.state.params.imageId}`}}/>
+    <View style= {styles.container}>
+      <TouchableOpacity onPress= {handlePlay}>
+        <Image style= {styles.image} source= {{uri: `https://t-rbt.telesens.ua/t-rbt/image?id=${props.navigation.state.params.imageId}`}}/>
+      </TouchableOpacity>
       <Text>Artist: {props.navigation.state.params.artist} </Text>
       <Text>Price: {props.navigation.state.params.amountOnetime} </Text>
       <Text>Prolongation price: {props.navigation.state.params.amountPeriodic} </Text>
       <Text>Charge period: {props.navigation.state.params.chargePeriod} </Text>
       <Text>ID: {props.navigation.state.params.contentNo} </Text>
       <Text>Type: melody </Text>
-      <Button title= 'Buy' onPress= {() => props.buySong('0000', '0994006507', props.navigation.state.params.contentNo)}/>
+      <TouchableOpacity style= {styles.button} onPress= {() => props.navigation.push('Buy', props.navigation.state.params)}>
+        <Text> Buy </Text>
+      </TouchableOpacity>
     </View>
   )
 }
 
+export default SongInfo
+
 const styles = StyleSheet.create({
-
+  container: {
+    alignSelf: 'center',
+    marginTop: 10,
+  },
+  image: {
+    width: 200,
+    height: 200,
+    marginBottom: 5
+  },
+  button: {
+    marginTop: 10,
+    borderRadius: 5,
+    backgroundColor: '#09ab00',
+    height: 25,
+    alignItems: 'center',
+    justifyContent: 'center'
+  }
 })
-
-export default connect (state => ({data: dive`${state}promise`}), {buySong})(SongInfo)

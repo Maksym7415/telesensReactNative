@@ -12,12 +12,17 @@ const Header = props => {
         </Text>
           <View style= {{width: 50, height: 50}}>
           {props.data ? <TouchableOpacity onPress= {() => props.logout()}>
-                            <Text >Logout</Text>
+                            <Image
+                              style= {{width: 30, height: 30}}
+                              source= {require('../../images/logout.png')}
+                            />
                         </TouchableOpacity> :
                         <TouchableOpacity  onPress= {props.login}>
-                            <Text >Login</Text>
+                            <Image
+                              style= {{width: 30, height: 30}}
+                              source= {require('../../images/enter.png')}
+                            />
                         </TouchableOpacity>}
-          <Image style= {{width: 30, height: 30}} source= {{uri: 'https://t-rbt.telesens.ua/t-rbt/image?id=499105566'}}/>
         </View>
     </View>
   )

@@ -7,12 +7,13 @@ import Content from './content'
 const SubCats = props =>
     <View style= {styles.container}>
       <ListFlat
-        data= {props.navigation.state.params}
-        renderItem= {({ item }) => <Item press= {() => props.navigation.push('Content', item.contentCatId)} title= {item.catName} itemStyle= {styles.itemStyle} itemTitleStyle= {styles.itemTitleStyle}/>}
+        data= {props.navigation.state.params.data}
+        renderItem= {({ item }) => <Item press= {() => props.navigation.push('Content', {id: item.contentCatId, title: item.catName})} title= {item.catName} itemStyle= {styles.itemStyle} itemTitleStyle= {styles.itemTitleStyle}/>}
         keyExtractor= {item => item.contentCatId.toString()}
       />
     </View>
 
+export default SubCats
 
 const styles = StyleSheet.create({
   container: {
@@ -37,5 +38,3 @@ const styles = StyleSheet.create({
 
   }
 })
-
-export default SubCats

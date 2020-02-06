@@ -4,8 +4,16 @@ import { connect } from 'react-redux'
 import { dive } from '../../functions'
 import ContentItem from './contentItem'
 import { ListFlat } from '../components/flatList'
+import { readItemFromStorage } from '../../functions'
+import { authorization } from '../../redux/reducers/actions'
 
 const Profile = props => {
+
+  props.navigation.addListener('willFocus', () => {
+    if (!props.data) {
+      props.navigation.push('Authorize')
+    }
+  })
 
   return props.data ? (
     <View style= {styles.container}>
@@ -25,7 +33,8 @@ const Profile = props => {
 export default connect (state => ({
                                     data: dive`${state}authorization.payload.data.publicContentItem`,
                                     subscriber: dive`${state}authorization.payload.data.subscriber`
-                                  }))(Profile)
+                                  }),
+                                  {login: authorization})(Profile)
 
 const styles = StyleSheet.create({
   container: {

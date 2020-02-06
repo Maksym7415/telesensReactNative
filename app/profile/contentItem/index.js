@@ -22,7 +22,9 @@ const ContentItem = props =>
       <Text>
         {props.artist}
       </Text>
-      <Button title= 'Remove content' />
+      <TouchableOpacity style= {styles.button}>
+        <Text> Remove content</Text>
+      </TouchableOpacity>
     </View>
   </View>
 
@@ -39,10 +41,23 @@ const styles = StyleSheet.create({
   },
   imgContainer: {
     marginRight: 10,
+    padding: 5,
   },
   image: {
     width: 100,
     height: 100
+  },
+  button: {
+    width: 150,
+    height: 30,
+    backgroundColor: '#ffffff',
+    borderWidth: 0.5,
+    borderColor: '#2af500',
+    borderRadius: 5,
+    marginHorizontal: 10,
+    marginLeft: 'auto',
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 })
 

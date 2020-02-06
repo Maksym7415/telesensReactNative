@@ -17,7 +17,7 @@ const Categories = props => {
           <ListFlat
             styles= {styles.listStyle}
             data= {props.data}
-            renderItem= {({ item }) => !item.parentCatId && <Item press= {() => props.navigation.push('SubCats', getSubCatsContent(props.data, item.contentCatId))} title= {item.catName} itemStyle= {styles.itemStyle} itemTitleStyle= {styles.itemTitleStyle}/>}
+            renderItem= {({ item }) => !item.parentCatId && <Item press= {() => props.navigation.push('SubCats', {data: getSubCatsContent(props.data, item.contentCatId), title: item.catName})} title= {item.catName} itemStyle= {styles.itemStyle} itemTitleStyle= {styles.itemTitleStyle}/>}
             keyExtractor= {item => item.contentCatId.toString()}
           />
       </View>
